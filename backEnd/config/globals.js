@@ -20,6 +20,9 @@ module.exports.globals = {
 
   _: require('@sailshq/lodash'),
 
+  // Moments js
+  moment: require('moment'),
+
   /****************************************************************************
   *                                                                           *
   * This app was generated without a dependency on the "async" NPM package.   *
@@ -29,7 +32,7 @@ module.exports.globals = {
   *                                                                           *
   ****************************************************************************/
 
-  async: false,
+  async: require('async'),
 
   /****************************************************************************
   *                                                                           *

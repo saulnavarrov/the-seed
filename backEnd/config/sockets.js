@@ -9,6 +9,9 @@
  * https://sailsjs.com/config/sockets
  */
 
+// local config
+const loc = require('./local');
+
 module.exports.sockets = {
 
   /***************************************************************************
@@ -27,7 +30,9 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
 
-  // transports: [ 'websocket' ],
+  transports: [ 'websocket' ],
+
+  onlyAllowOrigins: loc.baseUrl,
 
 
   /***************************************************************************
@@ -76,7 +81,7 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
 
-  // grant3rdPartyCookie: true,
+  grant3rdPartyCookie: true,
 
 
 };

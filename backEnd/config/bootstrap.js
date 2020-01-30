@@ -9,7 +9,7 @@
  * https://sailsjs.com/config/bootstrap
  */
 
-module.exports.bootstrap = async function() {
+module.exports.bootstrap = async function(done) {
 
   // By convention, this is a good place to set up fake data during development.
   //
@@ -26,5 +26,10 @@ module.exports.bootstrap = async function() {
   //   // etc.
   // ]);
   // ```
+
+
+  // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
+  // (otherwise your server will never lift, since it's waiting on the bootstrap)
+  return done();
 
 };

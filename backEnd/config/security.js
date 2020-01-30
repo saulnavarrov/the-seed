@@ -13,6 +13,9 @@
  * https://sailsjs.com/config/security
  */
 
+// Data Local
+const loc = require('./local');
+
 module.exports.security = {
 
   /***************************************************************************
@@ -28,11 +31,15 @@ module.exports.security = {
   *                                                                          *
   ***************************************************************************/
 
-  // cors: {
-  //   allRoutes: false,
-  //   allowOrigins: '*',
-  //   allowCredentials: false,
-  // },
+  cors: {
+    allRoutes: true,
+    allowOrigins: loc.baseUrl,
+    // allowOrigins: '*',
+    allowCredentials: false,
+    allowRequestHeaders: 'content-type,x-xsrf-token,Authorization',
+    // allowRequestHeaders: '*',
+    allowRequestMethods: 'GET,PUT,POST,DELETE,OPTIONS,HEAD',
+  },
 
 
   /****************************************************************************
@@ -49,6 +56,6 @@ module.exports.security = {
   *                                                                           *
   ****************************************************************************/
 
-  // csrf: false
+  csrf: false
 
 };

@@ -13,6 +13,9 @@
  * https://sailsjs.com/docs/concepts/models-and-orm/model-settings
  */
 
+// Data Local
+const loc = require('./local');
+
 module.exports.models = {
 
 
@@ -35,7 +38,7 @@ module.exports.models = {
   *                                                                          *
   ***************************************************************************/
 
-  // schema: true,
+  schema: true,
 
 
   /***************************************************************************
@@ -53,7 +56,7 @@ module.exports.models = {
   *                                                                          *
   ***************************************************************************/
 
-  // migrate: 'alter',
+  migrate: 'alter',
 
 
   /***************************************************************************
@@ -102,6 +105,10 @@ module.exports.models = {
 
   dataEncryptionKeys: {
     default: 'K1dGJLI302ek/VNoToHFTd0bJYvuI3wrtzvVQrZi0h0='
+  },
+
+  dataEncryptionKeys: {
+    default: loc.dataEncryptionKeys.default,
   },
 
 
