@@ -1,0 +1,17 @@
+{
+  "name": "the-seed",
+  "private": false,
+  "version": "0.0.1",
+  "description": "Codigo de desarrollo de un backend de desarrollo completo listo para comenzar con el frontend",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "be-dev": "reset && NODE_ENV=development nodemon ./backEnd/app.js --port=20700",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {},
+  "author": "Saúl Navarrov >sinavarrov@gmail.com< github.com/saulnavarrov",
+  "license": "ISC"
+}
