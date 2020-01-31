@@ -104,10 +104,6 @@ module.exports.models = {
   ******************************************************************************/
 
   dataEncryptionKeys: {
-    default: 'K1dGJLI302ek/VNoToHFTd0bJYvuI3wrtzvVQrZi0h0='
-  },
-
-  dataEncryptionKeys: {
     default: loc.dataEncryptionKeys.default,
   },
 

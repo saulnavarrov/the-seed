@@ -16,6 +16,7 @@
 
 // Data local
 const loc = require('./local');
+const lh = loc.db.lh;
 
 module.exports.datastores = {
 
@@ -55,7 +56,7 @@ module.exports.datastores = {
     adapter: 'sails-mysql',
 
     // Personal local
-    url: `mysql://${loc.db.lh.user}:${loc.db.lh.pass}@${loc.db.lh.url}:${loc.db.lh.port}/${loc.db.lh.db}`
+    url: `mysql://${lh.user}:${lh.pass}@${lh.url}:${lh.port}/${lh.db}`
 
   },
 
