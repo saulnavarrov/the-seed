@@ -1,0 +1,127 @@
+/**
+ * deltadmin.css
+ * delta admin styles bootstrap
+ *
+ * @Saul Navarrov <Sinavarrov@gmail.com>
+ * @license MIT License
+ */
+
+
+/* loading modal ajax */
+.m-loading-content {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75em;
+  z-index: 5065;
+  overflow-x: hidden;
+  background: rgba(0, 0, 0, 0.667);
+}
+
+.m-loading-content .m-loading-popup {
+  background: #fff;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  width: 32em;
+  padding: 1em;
+  min-height: 200px;
+  border-radius: 5px;
+}
+
+/* loading modal ajax End */
+
+
+/* Modales Segundario y Terciarios en pantalla */
+.modal2 {
+  z-index: 1200;
+  position: fixed;
+  background-color: #00000080;
+}
+
+.modal3 {
+  z-index: 1300;
+  position: fixed;
+  background-color: #00000080;
+}
+
+.modal4 {
+  z-index: 1400;
+  position: fixed;
+  background-color: #00000080;
+}
+
+
+
+html,
+body {
+  height: 100%;
+}
+
+body.my-login-page {
+  background-color: #f7f9fb;
+  font-size: 14px;
+}
+
+.my-login-page .brand {
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin: 40px auto;
+  box-shadow: 0 0 40px rgba(0, 0, 0, .05);
+}
+
+.my-login-page .brand img {
+  width: 100%;
+}
+
+.my-login-page .card-wrapper {
+  width: 400px;
+}
+
+.my-login-page .card {
+  border-color: transparent;
+  box-shadow: 0 0 40px rgba(0, 0, 0, .05);
+}
+
+.my-login-page .card.fat {
+  padding: 10px;
+}
+
+.my-login-page .card .card-title {
+  margin-bottom: 30px;
+}
+
+.my-login-page .form-control {
+  border-width: 2.3px;
+}
+
+.my-login-page .form-group label {
+  width: 100%;
+}
+
+.my-login-page .btn.btn-block {
+  padding: 12px 10px;
+}
+
+.my-login-page .margin-top20 {
+  margin-top: 20px;
+}
+
+.my-login-page .no-margin {
+  margin: 0;
+}
+
+.my-login-page .footer {
+  margin: 40px 0;
+  color: #888;
+  text-align: center;
+}
