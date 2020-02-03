@@ -41,7 +41,7 @@ module.exports = function registersRouter(sails) {
               'xforwardedproto': req.headers['x-forwarded-proto'],
               'xrequeststart': req.headers['x-request-start'],
               'host': typeof (req.headers['host']) === 'undefined' ? req.headers['origin'] : `${req.protocol}://${req.headers['host']}`,
-              'url': req.url || loc.baseUrl[1],
+              'url': req.url || loc.baseUrl[0],
               'isSocket': req.isSocket || false,
               'method': req.method,
               'complete': req.complete,
