@@ -10,7 +10,7 @@ module.exports = function registersRouter(sails) {
      */
     initialize: async function (done) {
 
-      sails.log.info('Initializing hook... (`api/hooks/`)');
+      sails.log.info('Initializing hook... (`api/hooks/registers-routers`)');
 
       return done();
     },
@@ -41,7 +41,7 @@ module.exports = function registersRouter(sails) {
               'xforwardedproto': req.headers['x-forwarded-proto'],
               'xrequeststart': req.headers['x-request-start'],
               'host': typeof (req.headers['host']) === 'undefined' ? req.headers['origin'] : `${req.protocol}://${req.headers['host']}`,
-              'url': req.url || loc.baseUrl[0],
+              'url': req.url || sails.config.custom.baseUrl[0],
               'isSocket': req.isSocket || false,
               'method': req.method,
               'complete': req.complete,
