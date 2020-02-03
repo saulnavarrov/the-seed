@@ -38,7 +38,11 @@ module.exports.routes = {
   //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
   //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
-
+  'GET /-_-/': { action: 'dashboard/index', locals:{layout:'layouts/dashboard'} },
+  'GET /-_-/login':{ action: 'dashboard/view-login', locals:{layout:'layouts/login'} },
+  'GET /-_-/logout': { action: 'dashboard/view-logout', locals:{layout:'layouts/login'} },
+  'GET /-_-/forgot': { action: 'dashboard/view-forgot', locals:{layout:'layouts/login'} },
+  'GET /-_-/singup': { action: 'dashboard/view-singup', locals:{layout:'layouts/login'} },
 
 
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
