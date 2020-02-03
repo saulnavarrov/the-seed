@@ -61,8 +61,6 @@ module.exports = function registersRouter(sails) {
               'user': userId,
             };
 
-            sails.log(datosReg)
-
             // Pega datos en caso de que sea enviados por socket
             if (req.isSocket) {
               datosReg.xforwarderfor = req.socket.handshake.headers['x-forwarded-for'];
