@@ -19,4 +19,15 @@ module.exports.policies = {
 
   '*': true,
 
+  'dashboard/index': (req,res,next)=>{
+    let userId = req.session.userId;
+    sails.log('police')
+
+    if(userId) {
+      return next();
+    }
+
+    return res.redirect('/-_-/login')
+  },
+
 };
