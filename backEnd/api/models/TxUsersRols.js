@@ -14,7 +14,17 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    name: {
+      type: 'string',
+      required: true,
+      description: 'nombre del rol del usuario',
+    },
 
+    ident: {
+      type: 'number',
+      unique: true,
+      description: `Determina el identificador de busqueda entre uno y el otro para hacerlo mas facil`
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -24,7 +34,15 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+    permisos: {
+      collection: 'usersrolespermits',
+      via: 'usersrols'
+    },
 
+    users: {
+      collection: 'users',
+      via: 'rols'
+    }
   },
 
 };

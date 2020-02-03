@@ -15,6 +15,39 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
+    email: {
+      type: 'string',
+      required: true,
+      isEmail: true,
+      maxLength: 200,
+      example: 'carol.reyna@microsoft.com'
+    },
+
+    successType: {
+      type: 'String',
+      defaultsTo: 'attempt',
+      isIn: ['login', 'logout', 'attempt'],
+    },
+
+    success: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
+    ip: {
+      type: 'string'
+    },
+
+    port: {
+      type: 'string'
+    },
+
+    created: {
+      type: 'number',
+    },
+
+    // Desabilitando atributo
+    updatedAt: false,
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -24,8 +57,16 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+    user: {
+      model: 'users'
+    }
 
   },
+
+
+  //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗╔═╗  ╔═╗╦  ╔═╗╔═╗╔╦╗╔═╗╔═╗
+  //  ║  ║╠═ ╠╣ ║  ╚╦╝║  ║  ╠╣ ╚═╗  ║  ║  ╠╣ ╠═╣ ║ ╠╣ ╚═╗
+  //  ╚═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╚═╝╚═╝╚═╝  ╚═╝╚═╝╚═╝╩ ╩ ╩ ╚═╝╚═╝
 
 };
 

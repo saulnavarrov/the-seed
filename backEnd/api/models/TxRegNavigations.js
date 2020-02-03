@@ -76,7 +76,8 @@ module.exports = {
     },
 
     'userAgent' : {
-      type: 'string'
+      type: 'string',
+      columnType: 'varchar(1024) CHARACTER SET utf8mb4'
     },
 
     'acceptEncodings' : {
