@@ -8,7 +8,7 @@
 module.exports = {
 
   schema: true,
-  tableName: 'TxAttempsLogins',
+  tableName: 'TxAttemptsLogins',
   attributes: {
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
@@ -58,7 +58,7 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     user: {
-      model: 'users'
+      model: 'txusers'
     }
 
   },

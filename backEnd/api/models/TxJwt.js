@@ -39,12 +39,12 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     uses: {
-      collection: 'jwtuse',
+      collection: 'txjwtuse',
       via: 'jsonWebToken'
     },
 
     owner: {
-      model: 'users'
+      model: 'txusers'
     },
   },
 

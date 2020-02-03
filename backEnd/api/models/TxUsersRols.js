@@ -35,12 +35,12 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     permisos: {
-      collection: 'usersrolespermits',
+      collection: 'txusersrolspermits',
       via: 'usersrols'
     },
 
     users: {
-      collection: 'users',
+      collection: 'txusers',
       via: 'rols'
     }
   },

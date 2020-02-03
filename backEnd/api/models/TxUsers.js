@@ -179,17 +179,17 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     rols: {
-      model: 'usersroles'
+      model: 'txusersrols'
     },
 
     // Intentos de Login
     attemptsLogin: {
-      collection: 'attemptslogin',
+      collection: 'txattemptslogins',
       via: 'user'
     },
 
     jsonWebTokens: {
-      collection: 'jwt',
+      collection: 'txjwt',
       via: 'owner'
     },
 
@@ -239,4 +239,4 @@ module.exports = {
     // Retorno de datos.
     return proceed();
   }
-}
+};
