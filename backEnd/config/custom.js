@@ -16,6 +16,8 @@ module.exports.custom = {
 
   baseUrl: locals.baseUrl,
 
+  frontEndUrl: locals.frontEndUrl,
+
   contacto: locals.contacto,
 
   attemptsLogin: locals.attemptsLogin,
