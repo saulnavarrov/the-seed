@@ -44,6 +44,8 @@ module.exports.routes = {
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
+  'POST /api/v1/users':                               { action: 'users/list' },
+  'POST /api/v2/users/create':                        { action: 'users/create' },
 
 
   //  ╔═╗╔═╗╦  ╔═╗╦ ╦ ╔═╗ ╔═╗
