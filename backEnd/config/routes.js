@@ -20,7 +20,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': async (req, res) => {
-    return res.send(`Server ok ✔`);
+    return res.send(`<center><h1>Server Ok <span style="color: #009d3a;">✔</span></h1></center>`);
   },
 
 
