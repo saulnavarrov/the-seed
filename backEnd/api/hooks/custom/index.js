@@ -115,6 +115,10 @@ will be disabled and/or hidden in the UI.
         '/*': {
           skipAssets: true,
           fn: async function (req, res, next) {
+
+            // Deshabilitando funcionamiento de este hook
+            return next();
+
             const _ = require('@sailshq/lodash');
 
             // First, if this is a GET request (and thus potentially a view),
