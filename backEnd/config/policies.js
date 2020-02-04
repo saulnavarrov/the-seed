@@ -19,15 +19,30 @@ module.exports.policies = {
 
   '*': true,
 
-  'dashboard/index': (req,res,next)=>{
-    let userId = req.session.userId;
-    sails.log('police')
+  // // Auth
+  // 'dashboard/auth/*': true,
+  // // dashboard
+  // // 'dashboard/*': ['AuthenticatedUser']
 
-    if(userId) {
-      return next();
-    }
+  // 'dashboard/index': (req,res,next)=>{
+  //   let userId = req.session.userId;
+  //   sails.log('police')
 
-    return res.redirect('/-_-/login')
-  },
+  //   if(userId) {
+  //     return next();
+  //   }
+
+  //   return res.redirect('/-_-/login')
+  // },
+
+  // Auth
+  'dashboard/auth/*': true,
+  'dashboard/view-login' : ['AuthLogoutRoots'],
+  'dashboard/view-singup': ['AuthLogoutRoots'],
+  'dashboard/view-forgot': ['AuthLogoutRoots'],
+  'dashboard/view-logout': ['AuthLoginRoots'],
+
+  // dashboard
+  'dashboard/index': ['AuthLoginRoots'],
 
 };
