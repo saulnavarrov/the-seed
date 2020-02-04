@@ -29,6 +29,12 @@ module.exports = {
     let rq = this.req; // Request Cliente Page
     let TitlePage = sails.i18n('Login.title');
 
+
+    sails.log.error('===============================>')
+    sails.log.error('Eliminar esta función mas adelante');
+    // Clear the `userId` property from this session.
+    delete this.req.session.userId;
+
     /***************************************************************************************
      * BLOQUE DE TRABAJO
      ***************************************************************************************/

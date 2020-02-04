@@ -20,7 +20,7 @@ module.exports = {
 
   exits: {
     success: {
-      viewTemplatePath: 'pages/dashboard/',
+      viewTemplatePath: 'pages/dashboard/index',
     }
   },
 
