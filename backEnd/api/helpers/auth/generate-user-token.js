@@ -77,7 +77,7 @@ module.exports = {
     encodedToken = jwt.encode(configToken, jwtSecret.secret);
 
     // registranto token al usuario correspondiente
-    let createToken = await Jwt.create({
+    let createToken = await TxJwt.create({
       token: encodedToken,
       expires: expires,
       owner: inputs.user.id,

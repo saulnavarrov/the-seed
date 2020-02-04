@@ -81,13 +81,13 @@ async function saveJwtUse (token, ipAddress) {
     // Existencia del token creado.
     if (findTokenDb.success === 'not built') {
       // Guardando token y que Ip lo esta usando.
-      await JwtUse.create({
+      await TxJwtUse.create({
         remoteAddress: _ipAddress,
         token: _token
       });
     } else {
       // Guardando token y que Ip lo esta usando.
-      await JwtUse.create({
+      await TxJwtUse.create({
         remoteAddress: _ipAddress,
         token: _token,
         tokenReside: true,
@@ -234,7 +234,7 @@ async function findToken (token) {
   let _tok = token;
 
   // Trajendo el token de la base de datos.
-  let findToken = await Jwt.findOne({token: _tok});
+  let findToken = await TxJwt.findOne({token: _tok});
 
   // Verificando existencia
   if (_.isUndefined(findToken)) {
@@ -265,7 +265,7 @@ async function findUserFromToken (token) {
   let _iss = token.iss.split('|');
 
   // Buscanso usuario
-  let userFind = await Users.findOne({id: _iss[0]})
+  let userFind = await TxUsers.findOne({id: _iss[0]})
                             .select(['id', 'identification', 'name', 'lastName']);
 
   // Verificando si el usuario existe o no.

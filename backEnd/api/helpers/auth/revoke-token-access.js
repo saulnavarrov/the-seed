@@ -82,7 +82,7 @@ module.exports = {
  */
 async function revokedTokenUserDb(userId) {
   // Revocando anteriores accesos para este usuario
-  await Jwt.update({owner: userId, revoked: false})
+  await TxJwt.update({owner: userId, revoked: false})
         .set({
           revoked: true
         });
@@ -100,7 +100,7 @@ async function revokedTokenUserDb(userId) {
 async function revokedTokenDb(token){
   let _token = token;
 
-  await Jwt.update({token: _token})
+  await TxJwt.update({token: _token})
         .set({
           revoked: true
         });

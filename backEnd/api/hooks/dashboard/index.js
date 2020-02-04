@@ -225,8 +225,8 @@ will be disabled and/or hidden in the UI.
 
               // Exclude any fields corresponding with attributes that have `protect: true`.
               var sanitizedUser = _.extend({}, loggedInUser);
-              for (let attrName in Users.attributes) {
-                if (Users.attributes[attrName].protect) {
+              for (let attrName in TxUsers.attributes) {
+                if (TxUsers.attributes[attrName].protect) {
                   delete sanitizedUser[attrName];
                 }
               } //∞
