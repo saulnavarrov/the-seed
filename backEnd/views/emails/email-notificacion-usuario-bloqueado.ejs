@@ -1,0 +1,17 @@
+<% /* Note: This is injected into `views/layouts/layout-email.ejs`*/ %>
+
+<div style=" font-size: 1.7em; text-align: left; ">
+  <p>Tu acceso ha sido bloqueado.</p>
+</div>
+
+<div id="contenido">
+  <p>Hola <%= fullName %>!</p>
+  <p>Nuestro equipo se toma la seguridad muy enserio, </p>
+  <p>Debido a los multiples intentos de inicio de sesión se ha bloqueado el acceso desde este momento.<br>Te invitamos a que cambies la contraseña por seguridad usando el boton de abajo</p>
+  <br>
+  <p>Email: <%= Email %><br>
+  <br>
+  <a href="<%= url.resolve(sails.config.custom.frontEndUrl,'/email/confirm')+'?token='+encodeURIComponent(token) %>" style="text-decoration: none;"> <button style=" width: 200px; height: 50px; background-color: #1A237E; border: 0px; border-style: none; margin: 0px auto; display: table; font-size: 1.3em; border-radius: 4px; cursor: pointer; color: #FFF; ">Confirmar</button> </a>
+  <br>
+  <p>En caso de que no puedas ver el boton también puedes hacer clip en este Link <a href="<%= url.resolve(sails.config.custom.frontEndUrl,'/email/confirm')+'?token='+encodeURIComponent(token) %>"><%= url.resolve(sails.config.custom.frontEndUrl,'/email/confirm')+'?token='+encodeURIComponent(token) %></a></p>
+</div>
