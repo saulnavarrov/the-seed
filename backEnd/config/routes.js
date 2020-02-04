@@ -38,16 +38,23 @@ module.exports.routes = {
   //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
   //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
-  'GET /-_-/': { action: 'dashboard/index', locals:{layout:'layouts/dashboard'} },
-  'GET /-_-/login':{ action: 'dashboard/view-login', locals:{layout:'layouts/login'} },
-  'GET /-_-/logout': { action: 'dashboard/view-logout', locals:{layout:'layouts/login'} },
-  'GET /-_-/forgot': { action: 'dashboard/view-forgot', locals:{layout:'layouts/login'} },
-  'GET /-_-/singup': { action: 'dashboard/view-singup', locals:{layout:'layouts/login'} },
+  'GET /-_-/':        { action: 'dashboard/index',      locals:{layout:'layouts/dashboard'} },
+  'GET /-_-/login':   { action: 'dashboard/view-login', locals:{layout:'layouts/login'} },
+  'GET /-_-/logout':  { action: 'dashboard/view-logout', locals:{layout:'layouts/login'} },
+  'GET /-_-/forgot':  { action: 'dashboard/view-forgot', locals:{layout:'layouts/login'} },
+  'GET /-_-/singup':  { action: 'dashboard/view-singup', locals:{layout:'layouts/login'} },
 
 
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
+  // AUTHS
+  'POST /api/v2/auth/login':                          { action: 'dashboard/auth/login' },
+  'POST /api/v2/auth/logout':                         { action: 'dashboard/auth/logout' },
+  'POST /api/v2/auth/forgot':                         { action: 'dashboard/auth/forgot' },
+  'POST /api/v2/auth/singup':                         { action: 'dashboard/auth/singup' },
+
+  // USERS
   'POST /api/v2/users':                               { action: 'users/list' },
   'POST /api/v2/users/create':                        { action: 'users/create' },
 
