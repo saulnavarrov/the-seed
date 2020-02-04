@@ -1,5 +1,5 @@
 /**
- * authenticatedUser
+ * AuthLogoutRoots
  * @module Police
  * @description Verificara que el usuario este autenticado.
  * @author SaulNavarrov <Sinavarrov@gmail.com>
@@ -7,21 +7,19 @@
  *   https://sailsjs.com/config/policies
  *   https://sailsjs.com/docs/concepts/policies
  *   https://sailsjs.com/docs/concepts/policies/access-control-and-permissions
+ * @created 2019/02/03
+ * @version 1.0
  */
 module.exports = async function (req, res, next) {
 
-  // Var Authenticated
-  let authUser = req.session.userId;
+  // Traigo el id del usuario.
+  let userId = req.session.userId;
 
-  // Verificando
-  if (authUser) {
+  // Por si el usuario esta tiene login
+  if (!userId) {
     return next();
   }
 
-  // Usuario no authenticado
-  return res.forbiddenJSON({
-    type: 'FORBIDDEN',
-    message: `No está permitido realizar esta acción`
-  });
-
-}
+  // Redireccionando si no existe una sesión abierta
+  return res.redirect('/-_-/');
+};
