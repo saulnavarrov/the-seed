@@ -67,12 +67,11 @@ requests over WebSockets instead of HTTP).`,
     const rq = this.req;
     const rs = this.res;
     const _ = require('lodash');
-    const moment = require('moment');
     let userId = rq.session.userId;
     let emailAddress = inputs.emailAddress;
     let rememberMe = inputs.rememberMe;
     let password = inputs.password;
-    let updatedAt = moment().toJSON();
+    let updatedAt = Date.now();
     let attemptsLogin = sails.config.custom.attemptsLogin;
     let attemptsTime = sails.config.custom.attemptsTime;
     let ipAddress = rq.headers['xforwardedfor'] || rq.headers['xrealip'];
@@ -156,7 +155,7 @@ requests over WebSockets instead of HTTP).`,
         em: emailAddress.toLowerCase(),
         id: 1,
         s: false,
-        ip: rq.headers['x-forwarded-for'],
+        ip: ipAddress,
         port: rq.protocol,
         type: 'attempt'
       });
@@ -173,12 +172,17 @@ requests over WebSockets instead of HTTP).`,
 
     // Solo se le dara un inicio de session a las personas que este habilitadas,
     // y con el correo electronico confirmado, sino se les devolvera un error.
-    if (userRecord.status !== 'E' || userRecord.emailStatus !== 'confirmed') {
+    if (userRecord.status === 'B' ||
+        userRecord.status === 'I' ||
+        userRecord.status === 'N' ||
+        userRecord.status === 'ID' ||
+        userRecord.emailStatus === 'unconfirmed' ||
+        userRecord.emailStatus === 'changeRequested') {
       await attemptsLoginFailSee({
         em: emailAddress.toLowerCase(),
         id: userRecord.id,
         s: false,
-        ip: rq.headers['x-forwarded-for'],
+        ip: ipAddress,
         port: rq.protocol,
         type: 'attempt'
       });
@@ -199,91 +203,106 @@ requests over WebSockets instead of HTTP).`,
 
 
     // Verificación de la contraseña si coincide con la que esta guardada
-    await sails.helpers.passwords.checkPassword(password, userRecord.password)
-      .intercept('incorrect', async () => {
-        // Reportar intentos en la base de datos
-        // si supera los 5 intentos en menos de 1 hora
-        // se bloqueara la cuenta y tendra que cambiar de contraseña
-        // para poder desbloquear la cuenta.
-        // se llevar el registro en attemptsLogin
-        // tanto los intentos como el login
-        // attemptsTime = sails.config.custom.attemptsTime;
+    let ckeckPass = await sails.helpers.passwords.checkingPassword(
+      password,
+      userRecord.password
+    );
 
-        // Guardo el intento fallido
+    // Respondiendo en caso de que no coincida la contraseña
+    if (ckeckPass.success === 'INCORRECT') {
+      // Reportar intentos en la base de datos
+      // si supera los 5 intentos en menos de 1 hora
+      // se bloqueara la cuenta y tendra que cambiar de contraseña
+      // para poder desbloquear la cuenta.
+      // se llevar el registro en attemptsLogin
+      // tanto los intentos como el login
+      // attemptsTime = sails.config.custom.attemptsTime;
+
+      // Guardo el intento fallido
+      await attemptsLoginFailSee({
+        em: emailAddress.toLowerCase(),
+        id: userRecord.id,
+        s: false,
+        ip: ipAddress,
+        port: rq.protocol,
+        type: 'attempt'
+      });
+
+      // Restando el tiempo de 1 hora cuando intento ingresar.
+      let tampsTime = (Date.now() - attemptsTime);
+
+      // Criterio de busqueda de datos de las fallas de los usuarios
+      let criterioFinds = {
+        'user': userRecord.id,
+        'created': {
+          '>=': tampsTime
+        },
+      };
+
+      // Evaluo cuantos intetos tiene en la ultima hora.
+      let failsSession = await TxAttemptsLogins.find(criterioFinds).sort('id DESC');
+
+      // evaluación de la cuentas para bloquearlas por maximos intentos
+      let intentos = -1 ; // Cuenta los intentos fallidos para iniciar session
+
+      // Recopila los intentos fallidos hasta la ultima vez que inicio sesión
+      // es como si se reiniciara el contador
+      for (let lo = 0; lo < failsSession.length; lo++) {
+        let fails = failsSession[lo];
+        intentos++;
+        if (fails.success === true || fails.successType === 'blockade') {
+          lo = failsSession.length + 99;
+        }
+      }
+      sails.log(failsSession)
+      sails.log(`Intentos = ${intentos}`)
+      // Evaluacion para bloquear la cuenta
+      if (intentos >= attemptsLogin) {
+        sails.log.warn(`Se ha bloqueado el usario '${userRecord.names}' por superar el numero de intentos permitidos`);
+
+        // Generando token
+        let emailProofToken = await sails.helpers.strings.random('url-friendly');
+
+        // User Attemps Bloqueado
         await attemptsLoginFailSee({
           em: emailAddress.toLowerCase(),
           id: userRecord.id,
           s: false,
-          ip: rq.headers['x-forwarded-for'],
+          ip: ipAddress,
           port: rq.protocol,
-          type: 'attempt'
+          type: 'blockade'
         });
 
-        // Restando el tiempo de 1 hora cuando intento ingresar.
-        let tampsTime = (Date.now() - attemptsTime);
+        // Bloqueando usuario por intentos fallidos
+        await TxUsers.update({
+          id: userRecord.id
+        })
+        .set({
+          status: 'B',
+          emailProofToken: emailProofToken,
+          emailProofTokenExpiresAt: Date.now() + sails.config.custom.emailProofTokenTTL,
+          updatedAt: updatedAt
+        });
 
-        // Criterio de busqueda de datos de las fallas de los usuarios
-        let criterioFinds = {
-          'user': userRecord.id,
-          // 'success': false,
-          'created': {
-            '>=': tampsTime
-          },
-        };
-
-        // Evaluo cuantos intetos tiene en la ultima hora.
-        let failsSession = await AttemptsLogin.find(criterioFinds).sort('id DESC');
-
-        // evaluación de la cuentas para bloquearlas por maximos intentos
-        let intentos = 0; // Cuenta los intentos fallidos para iniciar session
-
-        // Recopila los intentos fallidos hasta la ultima vez que inicio sesión
-        // es como si se reiniciara el contador
-        for (let lo = 0; lo < failsSession.length; lo++) {
-          let fails = failsSession[lo];
-          intentos++;
-          if (fails.success === true) {
-            lo = failsSession.length + 99;
+        // Enviando correo de que el usuario se ha bloqueado
+        await sails.helpers.sendTemplateEmail.with({
+          to: userRecord.emailAddress,
+          subject: 'Tu acceso ha sido bloqueado',
+          template: 'email-notificacion-usuario-bloqueado',
+          templateData: {
+            fullName: `${userRecord.names}`,
+            Email: `${userRecord.emailAddress}`,
+            token: emailProofToken
           }
-        }
+        });
 
-        // Evaluacion para bloquear la cuenta
-        if (intentos >= attemptsLogin) {
-          sails.log.error(new Error(`Se ha bloqueado el usario '${userRecord.name}' por superar el numero de intentos permitidos`));
+        // retorno que la cuenta fue bloqueada
+        return exits.blocked();
+      }
 
-          // Generando token
-          let emailProofToken = await sails.helpers.strings.random('url-friendly');
-
-          // Bloqueando usuario por intentos fallidos
-          await Users.update({
-            id: userRecord.id
-          })
-          .set({
-            status: 'B',
-            emailProofToken: emailProofToken,
-            emailProofTokenExpiresAt: Date.now() + sails.config.custom.emailProofTokenTTL,
-            updatedAt: updatedAt
-          });
-
-          // Enviando correo de que el usuario se ha bloqueado
-          await sails.helpers.sendTemplateEmail.with({
-            to: createUser.emailAddress,
-            subject: 'Tu acceso ha sido bloqueado',
-            template: 'email-notificacion-usuario-bloqueado',
-            templateData: {
-              fullName: `${userRecord.name}`,
-              Email: `${userRecord.emailAddress}`,
-              token: emailProofToken
-            }
-          });
-
-          // retorno que la cuenta fue bloqueada
-          return 'blocked';
-        }
-
-        // Retorno del error
-        return 'badCombo';
-      });
+      // Retorno del error
+      return exits.badCombo();
+    }
 
     // Si "Recordarme" estaba habilitado, entonces mantén viva la sesión para
     // una mayor cantidad de tiempo. (Esto provoca una actualización de "Establecer cookie"
@@ -310,7 +329,7 @@ requests over WebSockets instead of HTTP).`,
       em: emailAddress.toLowerCase(),
       id: userRecord.id,
       s: true,
-      ip: rq.headers['x-forwarded-for'],
+      ip: ipAddress,
       port: rq.protocol,
       type: 'login'
     });
@@ -340,7 +359,7 @@ requests over WebSockets instead of HTTP).`,
     delete userRecord.emailChangeCandidate;
 
     // Encoded token
-    let tokenEncode = `${userRecord.emailAddress}|Bearer ${tokenizacion}`;
+    let tokenEncode = await sails.helpers.utilities.btoaBase64(`${userRecord.emailAddress}|Bearer ${tokenizacion.token}`);
 
     // All done.
     // Respond with view.
