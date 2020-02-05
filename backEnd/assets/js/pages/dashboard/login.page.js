@@ -53,6 +53,8 @@ parasails.registerPage('auth-login', {
   mounted: async function () {
     //…
     console.log(window.SAILS_LOCALS);
+    this.formData.emailAddress = 'pruebas4@example.com';
+    this.formData.password = 'Abcd123456-';
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
@@ -87,11 +89,7 @@ parasails.registerPage('auth-login', {
 
     submitLogin: async function () {
       let csrfToken = window.SAILS_LOCALS._csrf;
-      let formLogin = new FormData();
       this.progressLogin = true;
-
-      // Creando datos para enviar
-
 
       // request login
       axios.post('/api/v2/auth/login', {
@@ -107,7 +105,22 @@ parasails.registerPage('auth-login', {
         })
         .then(resp => {
           let resData = resp.data;
-          location.href = '/-_-/';
+          let timer = 1000;
+          localStorage.setItem('userToken', resData.token);
+
+          // alert ok funcional
+          Swal({
+            type: 'success',
+            title: 'Success',
+            text: 'Seras redireccionado',
+            showConfirmButton: false,
+            timer: timer+100
+          });
+
+          // Redireccioinando
+          setTimeout(()=>{
+            window.location.href = '/-_-/';
+          },timer);
         })
         .catch(err => {
           this.progressLogin = false;

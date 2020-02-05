@@ -15,6 +15,10 @@ parasails.registerPage('autn-logout', {
   },
   mounted: async function() {
     //…
+    localStorage.removeItem('userToken');
+    setTimeout(()=>{
+      window.location.href = '/-_-/';
+    }, 5000);
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
