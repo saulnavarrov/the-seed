@@ -26,7 +26,7 @@ module.exports = {
     successType: {
       type: 'String',
       defaultsTo: 'attempt',
-      isIn: ['login', 'logout', 'attempt'],
+      isIn: ['login', 'logout', 'attempt','blockade'],
     },
 
     success: {
@@ -67,6 +67,14 @@ module.exports = {
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗╔═╗  ╔═╗╦  ╔═╗╔═╗╔╦╗╔═╗╔═╗
   //  ║  ║╠═ ╠╣ ║  ╚╦╝║  ║  ╠╣ ╚═╗  ║  ║  ╠╣ ╠═╣ ║ ╠╣ ╚═╗
   //  ╚═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╚═╝╚═╝╚═╝  ╚═╝╚═╝╚═╝╩ ╩ ╩ ╚═╝╚═╝
+  beforeCreate: async (valueToCreate, proceed) => {
+    const _ = require('@sailshq/lodash');
 
+    // creando hora de registro
+    valueToCreate.created = Date.now();
+
+    // retorno de datos
+    return proceed();
+  },
 };
 
