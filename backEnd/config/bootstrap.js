@@ -68,6 +68,19 @@ module.exports.bootstrap = async function(done) {
       status: 'E',
       password: await sails.helpers.passwords.hashPassword('Abcd123456'),
       rols: 2
+    },
+    {
+      id: 4,
+      emailAddress: 'pruebas4@example.com',
+      names: 'Pruebas',
+      lastNames: 'Four',
+      isSuperAdmin: false,
+      role: 1,
+      identification: '1028004961',
+      emailStatus: 'confirmed',
+      status: 'E',
+      password: await sails.helpers.passwords.hashPassword('Abcd123456'),
+      rols: 2
     }]);
   }
 
