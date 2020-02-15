@@ -34,11 +34,11 @@
       <%/* Usuarios */%>
       <% if(me.rols.ident <= 1) { %>
         <li class="menu-header">Usuarios</li>
-        <li class="dropdown <%= menu.l1 === 'usuarios' ? 'active' : '' %>">
+        <li class="dropdown <%= menu.l1 === 'users' ? 'active' : '' %>">
           <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Users</span></a>
           <ul class="dropdown-menu">
-            <li class="<%= menu.l2 === 'users' ? 'active' : '' %>"><a class="nav-link" href="/-_-/users"><i class="fas fa-user"></i> Users</a></li>
-            <li class="<%= menu.l2 === 'rol' ? 'active' : '' %>"><a class="nav-link" href="/-_-/users/roles"><i class="fas fa-user"></i> Roles</a></li>
+            <li class="<%= menu.l2 === 'users-list' ? 'active' : '' %>"><a class="nav-link" href="/-_-/users"><i class="fas fa-user"></i> Users</a></li>
+            <li class="<%= menu.l2 === 'rols' ? 'active' : '' %>"><a class="nav-link" href="/-_-/rols"><i class="fas fa-user"></i> Roles</a></li>
           </ul>
         </li>
       <% } %>

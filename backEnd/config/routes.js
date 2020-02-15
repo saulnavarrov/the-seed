@@ -47,6 +47,11 @@ module.exports.routes = {
   'GET /-_-/forgot':  { action: 'dashboard/view-forgot', locals:{layout:'layouts/login'} },
   'GET /-_-/singup':  { action: 'dashboard/view-singup', locals:{layout:'layouts/login'} },
 
+  // Users
+  'GET /-_-/users':   { action: 'dashboard/users/view-index', locals:{layout:'layouts/dashboard'} },
+  // Rols
+  'GET /-_-/rols':    { action: 'dashboard/rols/view-index', locals:{layout:'layouts/dashboard'} },
+
 
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗

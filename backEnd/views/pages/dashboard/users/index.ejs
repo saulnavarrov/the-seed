@@ -1,8 +1,8 @@
-<div id="blank-page" v-cloak>
+<div id="rols-index" v-cloak>
 
   <%/* PARTIALS NAVBAR, MAINSIDEBAR */%>
-  <%- partial('./partials/navbar.ejs') %>
-  <%- partial('./partials/mainSidebar.ejs') %>
+  <%- partial('./../partials/navbar.ejs') %>
+  <%- partial('./../partials/mainSidebar.ejs') %>
   <%/* END - PARTIALS*/%>
 
 
@@ -15,8 +15,9 @@
 
       <section class="section-body">
         <div class="jumbotron">
-          <h1>TODO: Esqueleto de las nuevas paginas de uso en dashboard.</h1>
-          <p>(See also <em>assets/styles/pages/dashboard/blank-page.less</em>, <em>assets/js/pages/dashboard/blank-page.page.js</em>, and <em>api/controllers/dashboard/view-blank-page.js</em>.)</p>
+
+          <h1>TODO: Implement this page.</h1>
+          <p>(See also <em>assets/styles/pages/dashboard/users/index.less</em>, <em>assets/js/pages/dashboard/users/index.page.js</em>, and <em>api/controllers/dashboard/users/view-index.js</em>.)</p>
           <br>
         </div>
       </section>
@@ -34,8 +35,7 @@
   </div>
 
   <%/* PARTIALS FOOTER */%>
-  <%- partial('./partials/footer.ejs') %>
+  <%- partial('./../partials/footer.ejs') %>
   <%/* END - PARTIALS*/%>
-
 </div>
 <%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

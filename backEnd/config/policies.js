@@ -45,5 +45,9 @@ module.exports.policies = {
   // dashboard
   'dashboard/index': ['AuthLoginRoots'],
   'dashboard/view-blank-page': ['AuthLoginRoots'],
+  // Users
+  'dashboard/users/view-index': ['AuthLoginRoots'],
+  // Rols
+  'dashboard/rols/view-index': ['AuthLoginRoots'],
 
 };
