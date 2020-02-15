@@ -52,12 +52,13 @@ parasails.registerPage('auth-login', {
   },
   mounted: async function () {
     //…
-    console.log(window.SAILS_LOCALS);
+
+    console.error(new Error('hay que borrar estas lineas ya que son componentes automatizados que no deben estar .'));
     this.formData.emailAddress = 'sinavarrov@example.com';
     this.formData.password = 'Abcd123456';
 
     Swal({
-      type: 'danger',
+      type: 'error',
       title: 'Hay que borrar este dato',
       text: 'Seras redireccionado',
       showConfirmButton: false,
@@ -182,9 +183,7 @@ parasails.registerPage('auth-login', {
       let validateEmail = await this.validateEmail().then((r)=>{return r;});
       let validatePassword = await this.validatePassword().then((r)=>{return r;});
 
-
       if(validateEmail && validatePassword){
-        // console.log(`Email: ${validateEmail} + Pass: ${validatePassword} + ${window.SAILS_LOCALS._csrf}`);
         this.submitLogin();
       }
     }
