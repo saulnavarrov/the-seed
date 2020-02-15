@@ -1,5 +1,41 @@
 <div id="dashboard-index" v-cloak>
-  <p>dashboar</p>
-  <p><a href="/-_-/logout">logout</a></p>
+
+  <%/* PARTIALS NAVBAR, MAINSIDEBAR */%>
+  <%- partial('./partials/navbar.ejs') %>
+  <%- partial('./partials/mainSidebar.ejs') %>
+  <%/* END - PARTIALS*/%>
+
+
+  <div class="main-content">
+    <section class="section">
+
+      <h1 class="section-header">
+        <div>Dashboard</div>
+      </h1>
+
+      <section class="section-body">
+        <div class="jumbotron">
+          <h1>TODO: Implement this page.</h1>
+          <p>(See also <em>assets\styles\pages\view-pages\dashboard.less</em>, <em>assets\js\pages\view-pages\dashboard.page.js</em>, and <em>api\controllers\view-pages\view-dashboard.js</em>.)</p>
+          <br>
+          <p><a href="/-_-/logout">logout</a></p>
+        </div>
+      </section>
+    </section>
+
+    <section class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">Titulo Card</div>
+          <div class="card-body">{{ me }}</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <%/* PARTIALS FOOTER */%>
+  <%- partial('./partials/footer.ejs') %>
+  <%/* END - PARTIALS*/%>
 </div>
 <%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

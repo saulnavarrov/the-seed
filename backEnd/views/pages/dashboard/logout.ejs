@@ -1,7 +1,32 @@
 <div id="autn-logout" v-cloak>
 
-  <h1>TODO: Implement this page.</h1>
-  <p>(See also <em>assets/styles/pages/dashboard/logout.less</em>, <em>assets/js/pages/dashboard/logout.page.js</em>, and <em>api/controllers/dashboard/view-logout.js</em>.)</p>
+  <%/* PARTIALS NAVBAR, MAINSIDEBAR */%>
+  <%- partial('./partials/navbar-blank.ejs') %>
+  <%- partial('./partials/mainSidebar-blank.ejs') %>
+  <%/* END - PARTIALS*/%>
+
+
+  <div class="main-content">
+    <section class="section">
+
+      <h1 class="section-header">
+        <div>Logout</div>
+      </h1>
+
+      <section class="section-body">
+        <div class="jumbotron">
+          <h1>TODO: Cerrando Sesión.</h1>
+          <p>(See also <em>assets/styles/pages/dashboard/logout.less</em>, <em>assets/js/pages/dashboard/logout.page.js</em>, and <em>api/controllers/dashboard/view-logout.js</em>.)</p>
+          <br>
+        </div>
+      </section>
+    </section>
+
+  </div>
+
+  <%/* PARTIALS FOOTER */%>
+  <%- partial('./partials/footer-blank.ejs') %>
+  <%/* END - PARTIALS*/%>
 
 </div>
 <%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>
