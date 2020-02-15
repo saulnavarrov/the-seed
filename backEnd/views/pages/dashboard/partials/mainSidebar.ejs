@@ -1,0 +1,49 @@
+<%
+/**
+ * views/pages/dashboard/partials/mainSidebar.ejs
+ *
+ */%>
+
+
+<div class="main-sidebar" tabindex="1" style="overflow: hidden; outline: none;">
+  <aside id="sidebar-wrapper">
+
+    <div class="sidebar-brand">
+      <a href="/">Administrator</a>
+    </div>
+    <div class="sidebar-brand sidebar-brand-sm">
+      <a href="/">Adm</a>
+    </div>
+
+    <%/* CONTENIDO DEL SIDEBAR MENU */%>
+    <ul class="sidebar-menu">
+
+      <li class="menu-header">Dashboard</li>
+
+      <li class="<%= menu.l1 === 'dashboard' ? 'active' : '' %>">
+        <a class="nav-link" href="/-_-/"><i class="fas fa-fire"></i> <span>Dashboard</span></a>
+      </li>
+
+
+      <li class="<%= menu.l1 === 'blank-page' ? 'active' : '' %>">
+        <a class="nav-link" href="/-_-/blank-page"><i class="fas fa-fire"></i> <span>Blank Page</span></a>
+      </li>
+
+
+
+      <%/* Usuarios */%>
+      <% if(me.rols.ident <= 1) { %>
+        <li class="menu-header">Usuarios</li>
+        <li class="dropdown <%= menu.l1 === 'usuarios' ? 'active' : '' %>">
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Users</span></a>
+          <ul class="dropdown-menu">
+            <li class="<%= menu.l2 === 'users' ? 'active' : '' %>"><a class="nav-link" href="/-_-/users"><i class="fas fa-user"></i> Users</a></li>
+            <li class="<%= menu.l2 === 'rol' ? 'active' : '' %>"><a class="nav-link" href="/-_-/users/roles"><i class="fas fa-user"></i> Roles</a></li>
+          </ul>
+        </li>
+      <% } %>
+    </ul>
+
+  </aside>
+</div>
+
