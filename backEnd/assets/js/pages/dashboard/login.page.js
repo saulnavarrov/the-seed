@@ -53,8 +53,20 @@ parasails.registerPage('auth-login', {
   mounted: async function () {
     //…
     console.log(window.SAILS_LOCALS);
-    this.formData.emailAddress = 'pruebas4@example.com';
-    this.formData.password = 'Abcd123456-';
+    this.formData.emailAddress = 'sinavarrov@example.com';
+    this.formData.password = 'Abcd123456';
+
+    Swal({
+      type: 'danger',
+      title: 'Hay que borrar este dato',
+      text: 'Seras redireccionado',
+      showConfirmButton: false,
+      timer: 1500+100
+    });
+
+    setTimeout(()=>{
+      this.submitLogin();
+    },1500);
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
