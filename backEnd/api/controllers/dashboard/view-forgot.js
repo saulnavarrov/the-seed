@@ -27,7 +27,7 @@ module.exports = {
      * VARIABLES INICIALES
      ***************************************************************************************/
     let rq = this.req; // Request Cliente Page
-    let TitlePage = sails.i18n('Login.title');
+    let TitlePage = sails.i18n('Forgot.title');
 
     /***************************************************************************************
      * BLOQUE DE TRABAJO

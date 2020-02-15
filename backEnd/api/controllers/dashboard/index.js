@@ -29,14 +29,20 @@ module.exports = {
      * VARIABLES INICIALES
      ***************************************************************************************/
     let rq = this.req; // Request Cliente Page
-    let TitlePage = sails.i18n('Login.title');
+    let TitlePage = sails.i18n('Name App');
+    let menu = {
+      'l1': 'dashboard',
+      'l2': null,
+      'l3': null
+    };
 
     /***************************************************************************************
      * BLOQUE DE TRABAJO
      ***************************************************************************************/
     // Respond with view.
     return exits.success({
-      'titlePage': TitlePage
+      'titlePage': TitlePage,
+      'menu': menu
     });
 
   }

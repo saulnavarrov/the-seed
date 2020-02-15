@@ -1,5 +1,6 @@
 {
-  "Name App": "The Seed - App",
+	"Name App": "The Seed - App",
+	"Name App min": "TSA",
 	"Welcome": "Bienvenido",
 	"A brand new app.": "Una nueva aplicación.",
 	"hello": "Hola, ",
@@ -12,8 +13,8 @@
 	"Login.forgot": "¿Olvidó la contraseña?",
 	"Login.remember": "Recordarme",
 	"Login.no acount": "¿No estas registrado?",
-  "Login.acount create": "Registrate",
-  "logout.title": "Cerrando Sesión",
+	"Login.acount create": "Registrate",
+	"logout.title": "Cerrando Sesión",
 	"Register": "Registarse",
 	"Register.enabled View": "El Registro por esta página no es habilitado, Póngase en contacto con el Administrador para proporcionarle un Usuario y contraseña.",
 	"Register.enabled View 2": "Si ya cuenta con un usuario y contraseña, has clic aqui para ",
@@ -42,5 +43,6 @@
 	"power by Dev": "Dev by ",
 	"Users": "Usuarios",
 	"Users.new": "Registrar Nuevo Usuario",
-	"Reset  .form New Password": "Reset  .form New Password"
+	"Reset  .form New Password": "Reset  .form New Password",
+	"Logout.title": "Logout.title"
 }
