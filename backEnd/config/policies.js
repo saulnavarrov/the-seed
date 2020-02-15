@@ -44,5 +44,6 @@ module.exports.policies = {
 
   // dashboard
   'dashboard/index': ['AuthLoginRoots'],
+  'dashboard/view-blank-page': ['AuthLoginRoots'],
 
 };

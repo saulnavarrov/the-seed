@@ -23,6 +23,9 @@ module.exports.routes = {
     return res.send(`<center><h1>Server Ok <span style="color: #009d3a;">✔</span></h1></center>`);
   },
 
+  // Esqueleto del dashboard
+  'GET /-_-/blank-page': { action: 'dashboard/view-blank-page' },
+
 
   /***************************************************************************
   *                                                                          *

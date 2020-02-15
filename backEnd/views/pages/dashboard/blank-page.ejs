@@ -1,0 +1,43 @@
+<div id="blank-page" v-cloak>
+
+  <%/* PARTIALS NAVBAR, MAINSIDEBAR */%>
+  <%- partial('./partials/navbar.ejs') %>
+  <%- partial('./partials/mainSidebar.ejs') %>
+  <%/* END - PARTIALS*/%>
+
+
+  <div class="main-content">
+    <section class="section">
+
+      <h1 class="section-header">
+        <div>Blank Page</div>
+      </h1>
+
+      <section class="section-body">
+        <div class="jumbotron">
+          <h1>TODO: Esqueleto de las nuevas paginas de uso en dashboard.</h1>
+          <p>(See also <em>assets/styles/pages/dashboard/blank-page.less</em>, <em>assets/js/pages/dashboard/blank-page.page.js</em>, and <em>api/controllers/dashboard/view-blank-page.js</em>.)</p>
+          <br>
+        </div>
+      </section>
+    </section>
+
+    <section class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">Datos mios</div>
+          <div class="card-body">{{ me }}</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <%/* PARTIALS FOOTER */%>
+  <%- partial('./partials/footer.ejs') %>
+  <%/* END - PARTIALS*/%>
+</div>
+
+
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>
