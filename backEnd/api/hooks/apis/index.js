@@ -28,12 +28,13 @@ module.exports = function registersRouter(sails) {
           skipAssets: true,
           fn: async function (req, res, next) {
             // Configuración solo para los links de la api v2
-            sails.log.info('se intenta acceder a la api/v2');
+            sails.log.info('>Se intenta acceder a la api/v2');
 
             /***************************************************************************************
              * VARIABLES INICIALES
              ***************************************************************************************/
             const _ = require('@sailshq/lodash');
+            let isSocket = req.isSocket;
             let urlPath = req.url || '';
             let headerToken = {};
             let decodeToken = {};
@@ -51,12 +52,10 @@ module.exports = function registersRouter(sails) {
             }
 
 
+
             /***************************************************************************************
              * TRABAJANDO CON TOKENS
              ***************************************************************************************/
-            sails.log.info('==================================< TOKENS >==================================');
-            sails.log.info('Trabajando para conseguir el token');
-
             /*****************************************************************************
              * Extraemos el token de la Petición del Header
              *
@@ -140,6 +139,19 @@ module.exports = function registersRouter(sails) {
               });
             }
 
+
+            /***************************************************************************************
+             * BLOQUE DE SEGURIDAD SOCKET
+             ***************************************************************************************/
+            // Verificacion de usuario
+            if (!isSocket) {
+              return res.forbiddenJSON({
+                message: 'AJAX Inadmissible Petition'
+              });
+            }
+
+
+            // Continue return sin problema
             return next();
           }
         },
