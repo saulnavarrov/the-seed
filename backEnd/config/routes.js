@@ -66,6 +66,7 @@ module.exports.routes = {
   'POST /api/v2/users':                               { action: 'users/list' },
   'POST /api/v2/users/create':                        { action: 'users/create' },
 
+  'POST /api/v3/users':                               { action: 'users/list', csrf:false },
 
   //  ╔═╗╔═╗╦  ╔═╗╦ ╦ ╔═╗ ╔═╗
   //  ╠═╣╠═╝║  ╠╣ ║ ║ ╠╣  ╚═╗
