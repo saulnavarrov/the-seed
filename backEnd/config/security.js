@@ -38,7 +38,7 @@ module.exports.security = {
     allowCredentials: false,
     allowRequestHeaders: 'content-type,x-xsrf-token,Authorization',
     // allowRequestHeaders: '*',
-    allowRequestMethods: 'GET,PUT,POST,DELETE,OPTIONS,HEAD',
+    allowRequestMethods: 'GET,PUT,POST,PATCH,DELETE,OPTIONS,HEAD',
   },
 
 
