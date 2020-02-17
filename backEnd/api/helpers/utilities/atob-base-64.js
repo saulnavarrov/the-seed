@@ -47,14 +47,20 @@ module.exports = {
     if (text64 === '') {
       sails.log.info('No hay información de texto.');
       sails.log.error(new Error(`Texto en base64: ${text64}; no hay datos para convertir en texto`));
-      return exits.success('No hay información de texto.');
+      return exits.success({
+        type: 'ERROR-TEXT',
+        message: 'No hay información de texto.'
+      });
     }
 
     // Si no es de tipo String
     if (!_.isString(text64)) {
       sails.log.info('Solo se permite String');
       sails.log.error(new Error(`Texto en base64: ${text64}; es un ${typeof(text64)}, envielo en formato String para pasarlo a texto legible`));
-      return exits.success('Solo se permite String');
+      return exits.success({
+        type: 'ERROR-TYPEOF-STRING',
+        message: 'Solo se permite String'
+      });
     }
 
     // Convirtiendo a buff

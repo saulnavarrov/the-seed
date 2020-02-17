@@ -1,21 +1,19 @@
 /**
- * get-access-token.js
+ * get-access-token-header.js
  *
  * @description :: Mirar abajo la description ► ↓↓↓
  *
- * @src {{proyect}}/api/helpers/auth/get-access-token.js
+ * @src {{proyect}}/api/helpers/auth/get-access-token-header.js
  * @author Saul Navarrov <Sinavarrov@gmail.com>
- * @created 2019/11/08
+ * @created 2020/02/16
  * @version 1.0
  */
-
 module.exports = {
 
-  friendlyName: 'Get Access Token',
+  friendlyName: 'Get access token header',
 
-  description: `Devolver token de acceso de solicitud.
-  Trabaja para sacar el token que viene desde la api y podelo
-  tratar en su area funcional.`,
+  description: `Busca dentro del header de cada petición si viene el token
+  con el nombre de "Autorization", lo revela y lo devuelve sin el "Bearer"`,
 
   inputs: {
     req: {
@@ -32,19 +30,23 @@ module.exports = {
 
   exits: {
     success: {
-      description: 'Token encontrado.'
+      description: 'Return Get Access Token Header.'
     },
-
-    incorrect: {
-      description: 'No se ha encontrado el token o no corresponde a lo buscado'
-    }
   },
 
-  fn: async function (inputs, exits) {
+
+  fn: async function (inputs,exits) {
+    /***************************************************************************************
+     * VARIABLES INICIALES
+     ***************************************************************************************/
     let rq = inputs.req;
     let allPars = inputs.allParams;
     let token = null;
 
+
+    /***************************************************************************************
+     * BUSCANDO EL TOKEN DENTRO DE LA SOLICITUD
+     ***************************************************************************************/
     // Busca el parametro en caso de que sea una solicitud Post mediante
     // Ajax o Socket
     if (rq.headers && rq.headers.authorization) {
@@ -62,38 +64,42 @@ module.exports = {
       token = await allParams(allPars);
     }
 
+
     // Formateando salida del token
     if (_.isUndefined(token) ||  token === null) {
       return exits.success({
-        success: false,
-        token: 0,
+        type: 'INCORRECT',
+        token: null,
         message: 'Token no encontrado en la solicitud.'
       });
     }
+
     // retorna null en caso de no tener ninguna propiedad
     return exits.success({
-      success: true,
+      type: 'SUCCESS',
       token: token,
       message: 'Token encontrado en la solicitud.'
     });
-  }
 
+  }
 };
 
 
 /**
-   * gathers all params for this request
-   *
-   * @param  {Object} req the express request object
-   * @return {Object}     all params
-   * @api public
-   */
+ * allParams()
+ * @description busca el token dentro de la url, en caso de que venga incrustado.
+ * @return {Object}     all params
+ * @api public
+ */
 async function allParams (allPars) {
+  // Nombre del parametro a pasar "access_token"
   let token = allPars.access_token;
 
+  // Si no existe el token
   if (_.isUndefined(token) ||  token === '') {
     return null;
   }
 
+  // Devuelvo el token
   return token;
 }

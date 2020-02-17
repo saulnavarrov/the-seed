@@ -31,6 +31,12 @@ module.exports = {
       defaultsTo: false
     },
 
+    pathUrl: {
+      type: 'string',
+      defaultsTo: '/',
+      columnType: 'varchar(4096) CHARACTER SET utf8mb4'
+    },
+
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
