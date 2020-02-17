@@ -162,7 +162,8 @@ will be disabled and/or hidden in the UI.
             // Otherwise, look up the logged-in user.
             var loggedInUser = await TxUsers.findOne({
               id: req.session.userId
-            }).populate('rols');
+            });
+
 
             // If the logged-in user has gone missing, log a warning,
             // wipe the user id from the requesting user agent's session,
@@ -178,6 +179,15 @@ will be disabled and/or hidden in the UI.
             if (!loggedInUser.password || loggedInUser.emailStatus === 'unconfirmed') {
               loggedInUser.dontDisplayAccountLinkInNav = true;
             }
+
+            // Obtenemos el rol y los permidos del usuario.
+            var rolsForUsers = await TxUsersRols.findOne({
+              id: loggedInUser.rols
+            }).omit(['createdAt','updatedAt']);
+
+            // Extienxo el Rol y el permiso dentro del Req
+            loggedInUser.role = rolsForUsers;
+
 
             // Expose the user record as an extra property on the request object (`req.me`).
             // > Note that we make sure `req.me` doesn't already exist first.

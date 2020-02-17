@@ -19,7 +19,7 @@ var globalFunctions = {
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: function data() {
     return {
-      globalFunctions: 'Funciones Globales',
+      globalFunctions: '> Init Funciones Globales',
 
       modalProgress: {
         act: false,
@@ -49,6 +49,131 @@ var globalFunctions = {
   //  ║║║║ ║ ╠═ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
+
+    /**
+     * progressBarD
+     * @description :: Control de la barra de carga en pantalla, la cual
+     * tendra un efecto y un control de entrada y salida.
+     * @param {Boolean} act :: Activar o desactivar
+     * @param {String} ani :: Animación que se vera en pantalla
+     * @author Saúl Navarrov <Sinavarrov@gmail.com>
+     * @version 1.0
+     */
+    progressBarD: async function (act,ani) {
+      // Activar
+      if (act) {
+        this.progressBar.active = true;
+        this.progressBar.animated = ani;
+      } else {
+        this.progressBar.animated = 'fadeOut faster';
+        setTimeout(() => {
+          this.progressBar.active = false;
+          this.progressBar.animated = '';
+        }, 505);
+      }
+    },
+
+
+    /**
+     * searchAnimated
+     * @description :: Crea una animación para la alerta cuando no hay
+     * resultados esperados, puede cerrar o abrir la alerta con la animación
+     * @param {Boolean} act :: Activa o desactiva la animación
+     * @param {String} ani :: Animación que se ejecutara
+     * @author Saúl Navarrov <Sinavarrov@gmail.com>
+     * @version 1.0
+     */
+    searchAnimated: async function (act,ani) {
+      if (act) {
+        this.alert.type = 'alert-info';
+        this.alert.active = act;
+        this.alert.animated = ani;
+      } else {
+        // Animación Salida
+        this.alert.animated = 'fadeOut faster';
+        setTimeout(() => {
+          this.alert.active = act;
+          this.alert.animated = '';
+        }, 505);
+      }
+    },
+
+
+
+    /**
+     * jwRsError
+     * @description :: alertas en pantalla en caso de haber un error
+     * @param {json} jwRs Datos del error
+     * @param {Boolean} display :: Usado solo para el Error 404 en caso de
+     * querer ver el error 'NotFound' en ventana emergente. y no como una alerta
+     * @author Saúl Navarrov <Sinavarrov@gmail.com>
+     * @version 1.0
+     */
+    jwRsError: async function (jwRs, display) {
+      this.progressBarD(false);
+      if (jwRs.statusCode >= 500 && jwRs.statusCode <= 502) {
+        this.alert = {
+          active: true,
+          animated: 'zoomIn',
+          type: 'alert-danger',
+          icon: 'ion-ios-close-outline',
+          title: `Error: ${jwRs.statusCode} - ${jwRs.body}`,
+          message: jwRs.error.message
+        };
+      } else if (jwRs.statusCode >= 400 && jwRs.statusCode <= 403) {
+        if (display) {
+          swal({
+            type: 'warning',
+            title: `${jwRs.statusCode} - ${jwRs.body.title}`,
+            text: `${jwRs.body.code} - ${jwRs.body.message}`,
+            showCancelButton: false,
+            confirmButtonColor: '#616161',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          this.alert = {
+            active: true,
+            animated: 'zoomIn',
+            type: 'alert-warning',
+            icon: 'ion-ios-close-outline',
+            title: `Error: ${jwRs.statusCode} - ${jwRs.body.code}`,
+            message: jwRs.body.message
+          };
+        }
+      } else if (jwRs.statusCode === 404) {
+        if(display) {
+          swal({
+            type: 'warning',
+            title: `${jwRs.statusCode} - ${jwRs.body.title}`,
+            text: `${jwRs.body.message}`,
+            showCancelButton: false,
+            confirmButtonColor: '#616161',
+            confirmButtonText: 'Aceptar'
+          });
+        } else {
+          this.alert = {
+            active: true,
+            animated: 'zoomIn',
+            type: 'alert-warning',
+            icon: 'ion-ios-close-outline',
+            title: `Error: ${jwRs.statusCode} - ${jwRs.body}`,
+            message: jwRs.body.data
+          };
+        }
+      } else if (jwRs.statusCode === 406) {
+        this.alert = {
+          active: true,
+          type: 'alert-warning',
+          animated: 'zoomIn',
+          icon: 'ion-ios-close-outline',
+          title: `Error: ${jwRs.statusCode} - ${jwRs.body.type}`,
+          message: jwRs.body.data
+        };
+      }
+    },
+
+
+
 
     /**
      * OpensModals
@@ -308,6 +433,31 @@ var globalFunctions = {
 
       // Si hubiera errores de forma, avast. (No se intentará la presentación.)
       return (Object.keys(formErrors).length > 0);
+    },
+
+
+    /**
+     * getToken
+     * @description :: Enviara el token de regreso formateado
+     * para ser enviado.
+     */
+    getToken: async function() {
+      // Busco el token
+      let token = localStorage.getItem('userToken');
+
+      // Verfiico que existe
+      if (token === null) {
+        Swal({
+          type: 'error',
+          title: 'Error Token',
+          text: 'No se encontro el Token del usuario. Cierre la sesión y vuelva a intentarlo, se el error perciste, comuniquese con el Soporte',
+          showConfirmButton: false,
+          timer: 1500+100
+        });
+        throw new Error('Token Vacio, por favor cierre la sesión y volva a intentarlo, si el error perciste comuniquese con el administrador');
+      }
+
+      return `Bearer ${String(token)}`;
     }
   }
 };

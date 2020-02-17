@@ -44,6 +44,7 @@
 	"Users": "Usuarios",
 	"Users.new": "Registrar Nuevo Usuario",
 	"Reset  .form New Password": "Reset  .form New Password",
-	"Logout.title": "Logout.title",
-	"Rols.Title": "Rols.Title"
+	"Logout.title": "Cerrando Sesión",
+	"Rols.Title": "Roles de Usuarios",
+	"Rols.title": "Rols.title"
 }

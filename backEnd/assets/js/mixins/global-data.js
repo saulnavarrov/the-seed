@@ -6,12 +6,12 @@
  * @src {{proyect}}/assets/js/mixins/global-data.js
  * @author Saul Navarrov <Sinavarrov@gmail.com>
  * @created 2019/04/20
- * @version 1.0
+ * @version 1.1
  */
 
- //  ╔╦╗╦╔╗ ╔╗╦╔╗ ╦╔═╗  ╔═╗╦  ╔═╗╔═╗╔╦╗╔═╗
- //  ║║║║ ╠═╣ ║║╚╗║╚═╗  ║  ║  ╠═ ╠═╣ ║ ╠═
- //  ╩ ╩╩╚╝ ╚╝╩╩ ╚╝╚═╝  ╚═╝╚═╝╚═╝╩ ╩ ╩ ╚═╝
+// ╔╦╗╦╔╗ ╔╗╦╔╗ ╦╔═╗  ╔═╗╦  ╔═╗╔═╗╔╦╗╔═╗
+// ║║║║ ╠═╣ ║║╚╗║╚═╗  ║  ║  ╠═ ╠═╣ ║ ╠═
+// ╩ ╩╩╚╝ ╚╝╩╩ ╚╝╚═╝  ╚═╝╚═╝╚═╝╩ ╩ ╩ ╚═╝
 var globalData = {
 
   //  ╦╔╗╔╦╔╦╗╦╔═╗╦    ╔═╗╔╦╗╔═╗╔╦╗╔═╗
@@ -19,7 +19,14 @@ var globalData = {
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: function data() {
     return {
-      globalData: 'Datos Globales',
+      globalData: '> Init Datos Globales',
+
+      // URL API
+      urlApi: 'http://api.the-seed.io/api',
+
+      listData: {}, // Listado de datos
+      listCount: 0, // cantidad de resultados en pantalla
+      listFullCount: 0, // Total de resultados
 
       limit: 10, // Limite por reques
       skip: 0, // Omision de datos * limit
@@ -27,15 +34,41 @@ var globalData = {
       searchsText: '', // Palabras de busquedas
       searching: false, // Buscando o visualizando todos los datos
 
-      // // Config Alert Display
-      // alert: {
-      //   active: false,
-      //   icon: 'ion-ios-information-outline',
-      //   title: 'Titulo de la alerta',
-      //   message: 'Mensaje de la alerta content',
-      //   type: 'alert-info',
-      //   animated: '',
-      // },
+      // control de paginación
+      pagination: {
+        a: 0,
+        c: 0,
+        v: 5,
+        list: [],
+        pre: false,
+        prev: 'disabled',
+        nex: false,
+        next: 'disabled'
+      },
+
+      // Config display
+      progressBar: {
+        active: true,
+        animated: ''
+      },
+
+      // Configuraciones de la vista de tablas
+      tableData: false,
+      footerTable: false,
+      search: false,
+      countData: false,
+      navegationsData: false,
+      numResult: false,
+
+      // Config Alert Display
+      alert: {
+        active: false,
+        icon: 'ion-ios-information-outline',
+        title: 'Titulo de la alerta',
+        message: 'Mensaje de la alerta content',
+        type: 'alert-info',
+        animated: '',
+      },
 
       // Modales
       modal: {
@@ -68,5 +101,6 @@ var globalData = {
   //  ║║║║ ║ ╠═ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
+
   }
 };

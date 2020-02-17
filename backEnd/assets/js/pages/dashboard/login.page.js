@@ -120,6 +120,8 @@ parasails.registerPage('auth-login', {
           let resData = resp.data;
           let timer = 1000;
           localStorage.setItem('userToken', resData.token);
+          localStorage.setItem('userPermits', JSON.stringify(resData.user.permits));
+          localStorage.setItem('userRol', JSON.stringify(resData.user.role));
 
           // alert ok funcional
           Swal({
@@ -132,7 +134,7 @@ parasails.registerPage('auth-login', {
 
           // Redireccioinando
           setTimeout(()=>{
-            window.location.href = '/-_-/';
+            window.location.href = '/-_-/users';
           },timer);
         })
         .catch(err => {
