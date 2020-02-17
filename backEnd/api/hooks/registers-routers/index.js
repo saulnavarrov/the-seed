@@ -36,7 +36,6 @@ module.exports = function registersRouter(sails) {
             let ip = req.headers['x-real-ip'] || req.ip;
 
             let datosReg = {
-              'xforwarderfor': req.headers['x-forwarded-for'] || ip,
               'protocol': req.protocol,
               'xforwardedproto': req.headers['x-forwarded-proto'],
               'xrequeststart': req.headers['x-request-start'],
@@ -63,7 +62,6 @@ module.exports = function registersRouter(sails) {
 
             // Pega datos en caso de que sea enviados por socket
             if (req.isSocket) {
-              datosReg.xforwarderfor = req.socket.handshake.headers['x-forwarded-for'];
               datosReg.xnginxproxy = req.socket.handshake.headers['x-nginx-proxy'];
               datosReg.connection = req.socket.handshake.headers['connection'];
               datosReg.cacheControl = req.socket.handshake.headers['cache-control'];
