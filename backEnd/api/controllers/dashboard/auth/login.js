@@ -334,6 +334,27 @@ requests over WebSockets instead of HTTP).`,
       type: 'login'
     });
 
+
+    // Agregando el rol del usuario
+    var rolsForUsers = await TxUsersRols.findOne({
+      id: userRecord.rols
+    }).omit(['createdAt','updatedAt']);
+
+    // Agregando los permisos del rol del usuario
+    var permitsForRols = await TxUsersRolsPermits.find()
+    .where({
+      'or': [ { id: rolsForUsers.permisos } ],
+      'and': [ { Tipo: ['V','F'] } ],
+    })
+    .limit(1000)
+    .omit(['createdAt','updatedAt','usersrols']);
+
+    // Agregandolo a la devolucion de vista
+    userRecord.role = rolsForUsers;
+    // Agregando los Permisos del usuario a la vista
+    userRecord.permits = permitsForRols;
+
+
     // Modify the active session instance.
     rq.session.userId = userRecord.id;
 
