@@ -75,12 +75,12 @@ module.exports = {
      * BLOQUE DE SEGURIDAD SOCKET Y LOGIN
      ***************************************************************************************/
     // Verificacion de usuario
-    if (!isSocket) {
-      return exits.unauthorized({
-        error: true,
-        message: 'Unauthorized'
-      });
-    }
+    // if (!isSocket && (/^api$/i.test(rq.url)) && (/^v2$/i.test(rq.url))) {
+    //   return exits.unauthorized({
+    //     error: true,
+    //     message: 'Unauthorized'
+    //   });
+    // }
 
 
 
