@@ -11,6 +11,17 @@
 
       <h1 class="section-header">
         <div><%= sails.i18n('Users') %></div>
+
+        <!-- Boton de acciones generales -->
+        <div class="section-header-breadcrumb dropdown">
+          <button type="button" class="btn btn-outline-dark" @click="OpensModals('create-users')">Agregar Usuario</button> &nbsp;
+
+          <a href="javascript:void(0)" data-toggle="dropdown" class="btn btn-outline-dark">Acciones</a>
+          <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+            <li><a href="javascript:void(0)" class="dropdown-item">Des/Activar Usuarios</a></li>
+            <li><a href="javascript:void(0)" class="dropdown-item">Eliminar Usuarios</a></li>
+          </ul>
+        </div>
       </h1>
 
       <%/*==== CONTENIDO ====*/%>
@@ -194,6 +205,10 @@
 
     </section>
   </div>
+
+  <%/* STAR PARTIALES DE LA PAGINA */%>
+    <%- partial('./partial-create-user.ejs') %>
+  <%/*  FIN PARTIALES */%>
 
   <%/* PARTIALS FOOTER */%>
   <%- partial('./../partials/footer.ejs') %>

@@ -78,6 +78,40 @@ var globalData = {
         cerrar: 'Cerrar Ventana',
         title: ''
       },
+
+      // Datos del nuevo usuario
+      formNewUser: {
+        role: '',
+        status: 'N',
+        identification: '',
+        name: '',
+        lastName: '',
+        isSuperAdmin: false,
+        emailAddress: '',
+        emailStatus: '',
+        phone: '+57',
+        password: '',
+        passwordPower: 'bg-danger', // Stados = bg-warning bg-danger bg-success
+        passwordPowerStyle: {
+          width: 5,
+          password: false,
+        }
+      },
+      // Datos del nuevo usuario
+      newUserCreate: {},
+
+      valForm: { // Validación del formulario
+        password: { valid: '', min: false, mayus: false, minus: false, numb: false, },
+        identification: { valid: '', message: 'Ingrese Numero de Identificación.' },
+        emailAddress: { valid: '', message: 'Ingrese Email' },
+        name: { valid: '', message: 'Ingrese el nombre del usuario' },
+        lastName: { valid: '', message: 'Ingrese el apellido del usuario.' },
+        phone: { valid: '', message: 'Ingrese Numero Telefonico' },
+        role: { valid: '', message: 'Dato Incompleto.' },
+        isSuperAdmin: { valid: '', message: 'Dato Incompleto.' },
+        emailStatus: { valid: '', message: 'Dato Incompleto.' },
+        status: { valid: '', message: 'Dato Incompleto.' },
+      },
     };
   },
 

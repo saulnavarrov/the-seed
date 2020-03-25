@@ -109,7 +109,7 @@ parasails.registerPage('users-index', {
             this.navegationsData = this.numResult = true;
           }
           // Method Pagination()
-        //   this.paginationCount();
+          //   this.paginationCount();
 
           // cuando se realiza la busqueda
           if (this.searching && (this.listCount === 0)) {
